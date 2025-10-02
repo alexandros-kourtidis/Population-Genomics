@@ -1,0 +1,25 @@
+=========================================================
+### preparation of files etc for subsequent analyses ###
+=========================================================
+
+# to check if files were copied correctly 
+# you will get OK for both files if md5 are equal. You can also use this for 3 files or more.
+# not sure if it works because it gave OK even when I checked different files...
+
+	md5sum file 1 file 2 | md5sum --check
+
+# to check the first ten lines of a zipped file:
+
+	zcat E150025011_L01_122_2.fq.gz | head
+
+# combine files with different sequencing rounds on the same individual
+
+	cat file1_1.fq.gz file2_1.fq.gz > combined_1.fq.gz
+
+# to check for overrepresented sequences in a dataset
+
+	module load FastQC
+	fastqc file1 file2 .. fileN
+
+
+
