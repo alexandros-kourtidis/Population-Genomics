@@ -1,4 +1,4 @@
 Making a PCA using PLINK, after filtering and LD prunning the dataset. 
 
-## docs/3DplinkPCA_batch1234_nmaf.html
+## https://github.com/alexandros-kourtidis/Population-Genomics.git/docs/3DplinkPCA_batch1234_nmaf.html
 Example of the 3d PCA I made :)
