@@ -1,0 +1,26 @@
+#!/bin/bash -l
+ 
+#SBATCH --cluster=genius
+#SBATCH --job-name=trim
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=05:00:00
+#SBATCH -A lp_svbelleghem
+#SBATCH --array=1-100 # Make sure the array size matches your sample count
+
+module load Trimmomatic/0.39-Java-1.8.0_192
+ 
+#This variable will store the job array number minus 1, so we can use it to get a sample from the samples list (index starts at 0)
+ID=$((SLURM_ARRAY_TASK_ID -1))
+ 
+# Sample IDs
+samples=(C5_BW_36962_C18 D4_BW_62256_C30 B1_BKN1_C12 B1_BKN1_C13 B1_BKN1_C18 B1_BKN1_C19 B1_BKN1_C24 B1_BKN1_C26 B1_BKN1_C27 B1_BKN1_C28 B1_BKN1_C30 B1_BKN1_C36 D3_BKLE5_C10 D5_BW_22050_C01 D5_BW_22050_C02 D5_BW_22050_C03 D5_BW_22050_C04 D5_BW_22050_C05 D5_BW_22050_C06 D5_BW_22050_C07 D5_BW_22050_C08 D5_BW_22050_C11 D5_BW_22050_C13 D5_BW_22050_C15 D5_BW_22050_C16 D5_BW_22050_C17 D5_BW_22050_C18 D5_BW_22050_C19 D5_BW_22050_C20 D5_BW_22050_C21 D5_BW_22050_C22 D5_BW_22050_C24 D5_BW_22050_C26 B3_ZW_C04 B3_ZW_C10 B3_ZW_C14 B3_ZW_C16 B3_ZW_C18 B3_ZW_C21 B3_ZW_C22 B3_ZW_C23 B3_ZW_C25 B3_ZW_C26 B3_ZW_C30 B3_ZW_C32 B3_ZW_C36 B3_ZW_C37 B3_ZW_C40 B3_ZW_C42 D2_LRV_C12 D2_LRV_C14 D2_LRV_C16 D2_LRV_C18 D2_LRV_C20 D2_LRV_C22 D2_LRV_C24 D2_LRV_C25 D2_LRV_C26 D2_LRV_C30 D2_LRV_C32 D2_LRV_C34 D2_LRV_C36 A1_AnOudin_C36 A1_AnOudin_C39 B1_BKN1_C38 B1_BKN1_C40 B1_BKN1_C41 C4_BW_48630_C02 C4_BW_48630_C07 C4_BW_48630_C09 C4_BW_48630_C10 C4_BW_48630_C11 C4_BW_48630_C12 C4_BW_48630_C14 C4_BW_48630_C15 C4_BW_48630_C16 C4_BW_48630_C17 C4_BW_48630_C19 C4_BW_48630_C22 C4_BW_48630_C23 C4_BW_48630_C29 D3_BKLE5_C01 A1_AnOudin_C38 B2_OM2_C12 B2_OM2_C20 B2_OM2_C23 B2_OM2_C25 B5_DA2_C03 B5_DA2_C09 B5_DA2_C14 B5_DA2_C15 B5_DA2_C16 B5_DA2_C19 C4_BW_48630_C01 C4_BW_48630_C03 C4_BW_48630_C06 D3_BKLE5_C02 D3_BKLE5_C04 D3_BKLE5_C06 D3_BKLE5_C07)
+ 
+cd /lustre1/scratch/363/vsc36396/daphnia_reseq/batch2
+ 
+#run trimmomatic for trimming
+java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar PE \
+$(echo "${samples[ID]}")/$(echo "${samples[ID]}")_1.fq.gz $(echo "${samples[ID]}")/$(echo "${samples[ID]}")_2.fq.gz \
+$(echo "${samples[ID]}")/$(echo "${samples[ID]}")_1_trimmed.fq.gz $(echo "${samples[ID]}")/$(echo "${samples[ID]}")_1_unpaired.fq.gz \
+$(echo "${samples[ID]}")/$(echo "${samples[ID]}")_2_trimmed.fq.gz $(echo "${samples[ID]}")/$(echo "${samples[ID]}")_2_unpaired.fq.gz \
+ILLUMINACLIP:/vsc-hard-mounts/leuven-data/363/vsc36396/scripts/02_BGIadapters.fa:2:30:10 LEADING:30 TRAILING:30 MINLEN:50
