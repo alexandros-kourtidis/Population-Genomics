@@ -11,4 +11,5 @@ Perfmorming scans of selection sweep signatures along the genome for different p
 2. run_07_sf2_plot_combined_allp_alls.R
 
 
+
 _Note: you should probably replace the hard-coded variables with soft-coded ones..._
