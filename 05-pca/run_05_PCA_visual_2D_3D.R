@@ -109,15 +109,19 @@ fig <- fig %>%
   )
 
 # Add scatter plot on top of the existing figure
+# Note: The part hovering names of clonal lines 
+# ( text = ~paste("Line:", LineName, "<br>Number:", LineNumber, "<br>Population:", Population) )
+# only works well if the volume areas are not applied !!
 fig <- fig %>%
   add_trace(
     data = plot_data, 
     x = ~PC1, y = ~PC2, z = ~PC3, 
-    color = ~Population, 
     type = "scatter3d", 
     mode = "markers",
-    marker = list(size = 4, color = ~Color),
-    legendgroup = ~Population
+    marker = list(size = 4, color = plot_data$Color),
+    legendgroup = ~Population,
+    text = ~paste("Line:", LineName, "<br>Number:", LineNumber, "<br>Population:", Population),
+    hoverinfo = "text"
   )
 
 # Add text annotations for each population cluster
@@ -137,3 +141,4 @@ for (i in seq_along(levels(plot_data$Population))) {
 
 # Show plot
 fig
+
