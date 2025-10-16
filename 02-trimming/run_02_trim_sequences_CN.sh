@@ -6,7 +6,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=05:00:00
 #SBATCH -A lp_svbelleghem
-#SBATCH --array=1 # Make sure the array size matches your sample count (1-97)
+#SBATCH --array=1 # Make sure the array size matches your sample count (1)
 
 module load cluster/genius/amd
 module load Trimmomatic/0.39-Java-1.8.0_192
