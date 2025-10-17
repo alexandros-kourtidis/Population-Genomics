@@ -1,0 +1,5 @@
+To use vcf2fasta you need to install it on a conda environment (if working on a cluster that does not support it):
+
+conda create -n vcf2fasta_env python=3.10 -y
+conda activate vcf2fasta_env
+pip install vcf2fasta
