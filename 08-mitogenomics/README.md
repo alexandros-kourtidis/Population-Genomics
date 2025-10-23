@@ -1,0 +1,1 @@
+Analysis of a multi-sample FASTA file containing the entire mitochondrial genome called from WGS data (see 04-variantcalling directory). The desired output is a phylogenetic tree and a haplotype network.
