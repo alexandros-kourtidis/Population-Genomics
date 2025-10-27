@@ -22,17 +22,23 @@ samples=($(ls *.vcf.gz))
 
 	# Loop through each sample VCF
 for vcf in "${samples[@]}"; do
-  sample_name=$(basename "$vcf" .vcf.gz)
+ sample_name=$(basename "$vcf" .vcf.gz)
 
 	# Generate consensus FASTA for variant sites only
-  bcftools consensus -f $REF $vcf | \
-    sed "1s/.*/>$sample_name/" > "$OUT_DIR/${sample_name}.fasta"
-
+ bcftools consensus \
+  -f $REF \
+  -a '_' \
+  --mark-del '-' \
+  --mark-ins lc \
+  "$vcf" | \
+ tr -d '[a-z]' | \
+ sed "1s/.*/>$sample_name/" \
+ > "$OUT_DIR/${sample_name}_indel.fasta"
 done
 
 echo "All sample FASTAs generated."
 
 	# Combine all FASTAs into one file
-cat $OUT_DIR/*.fasta > $OUT_DIR/combined_samples.fasta
+cat $OUT_DIR/*indel.fasta > $OUT_DIR/combined_samples_indel.fasta
 
-echo "Combined FASTA created: $OUT_DIR/combined_samples.fasta"
+echo "Combined FASTA created: $OUT_DIR/combined_samples_indel.fasta"
