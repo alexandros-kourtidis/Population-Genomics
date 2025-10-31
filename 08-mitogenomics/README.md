@@ -5,7 +5,7 @@ Analysis of a multi-sample FASTA file containing the entire mitochondrial genome
 (b) annotate deletions with -, which is comprehended as such by MEGA
 (c) annotate and remove insertions, which are messing up downstream analyses
 
-	# Generate consensus FASTA for variant sites only
+# Generate consensus FASTA for variant sites only
  bcftools consensus \
   -f $REF \
   -a '_' \ #absence of data
