@@ -1,6 +1,6 @@
 Analysis of a multi-sample FASTA file containing the entire mitochondrial genome called from WGS data (see 04-variantcalling directory). The desired output is a phylogenetic tree and a haplotype network.
 
-1. The FASTA files were created with the command, in order to:
+1.Aligned FASTA files were extracted from the vcf using the bcftools consensus command, with specifications to:
 (a) make the absence of data visible (noted with _, but our dataset with WGS only had the first base missing in some samples in the mitogenome).
 (b) annotate deletions with -, which is comprehended as such by MEGA
 (c) annotate and remove insertions, which are messing up downstream analyses
@@ -17,7 +17,7 @@ Analysis of a multi-sample FASTA file containing the entire mitochondrial genome
  > "$OUT_DIR/${sample_name}_indel.fasta"
 done
 
-2. Alignment was done manually in MEGA12 and exported as nexus. Added a traits block for the creation of population-informative haplotype network in PopART.
+2. Curation was done manually in MEGA12 and exported as nexus. Manually added a traits block for the creation of population-informative haplotype network in PopART.
    
  # Example snipset from the traits block in nexus
 Begin Traits;
