@@ -1,6 +1,6 @@
 # Analysis of a multi-sample FASTA file containing the entire mitochondrial genome called from WGS data (see 04-variantcalling directory). The desired output is a haplotype network and/or a simple phylogenetic tree.
 
-1. Aligned FASTA files were extracted from the vcf using the **bcftools consensus** command, with specifications to:
+1. Creation of the multi-fasta file: aligned single-sample FASTA files were extracted from each singular vcf using the **bcftools consensus** command, with specifications to:
 (a) make the absence of data visible (noted with _, but our dataset with WGS only had the first base missing in some samples in the mitogenome).
 
 (b) annotate deletions with -, which is comprehended as such by MEGA
