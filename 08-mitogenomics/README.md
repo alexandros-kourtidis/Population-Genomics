@@ -7,8 +7,8 @@ Analysis of a multi-sample FASTA file containing the entire mitochondrial genome
 
 (c) annotate and remove insertions, which are messing up downstream analyses
 
- Generate consensus FASTA for variant sites only
- bcftools consensus \
+Code snipset:
+bcftools consensus \
   -f $REF \
   -a '_' \ #absence of data
   --mark-del '-' \ #deletions
