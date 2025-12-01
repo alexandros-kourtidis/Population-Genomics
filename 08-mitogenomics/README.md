@@ -4,22 +4,22 @@ Analysis of a multi-sample FASTA file containing the entire mitochondrial genome
 
 **1**. Aligned single-sample FASTA files were extracted from each singular vcf using the **bcftools consensus** command and then concantenated in a multi-sample FASTA file. The bcftools consensus specifications were:
 
-(a) make the absence of data visible (noted with _, but our dataset with WGS only had the first base missing in some samples in the mitogenome).
+  (a) make the absence of data visible (noted with _, but our dataset with WGS only had the first base missing in some samples in the mitogenome).
 
-(b) annotate deletions with -, which is comprehended as such by MEGA
+  (b) annotate deletions with -, which is comprehended as such by MEGA
 
-(c) annotate and remove insertions, which are messing up downstream analyses
+  (c) annotate and remove insertions, which are messing up downstream analyses
 
-Code snipset:
-bcftools consensus \
-  -f $REF \
-  -a '_' \ #absence of data
-  --mark-del '-' \ #deletions
-  --mark-ins lc \ #insertions
-  "$vcf" | \
- tr -d '[a-z]' | \
- sed "1s/.*/>$sample_name/" > "$OUT_DIR/${sample_name}_indel.fasta"
-done
+  Code snipset:
+  bcftools consensus \
+    -f $REF \
+    -a '_' \ #absence of data
+    --mark-del '-' \ #deletions
+    --mark-ins lc \ #insertions
+    "$vcf" | \
+   tr -d '[a-z]' | \
+   sed "1s/.*/>$sample_name/" > "$OUT_DIR/${sample_name}_indel.fasta"
+  done
 
 **2**. Curation was done manually in **MEGA12** and exported as FASTA. Manually removed ambiguous sites (like Y, R, W, X, ...).
    
