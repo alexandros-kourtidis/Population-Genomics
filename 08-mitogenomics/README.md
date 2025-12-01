@@ -2,7 +2,7 @@ Analysis of a multi-sample FASTA file containing the entire mitochondrial genome
 
 # VCF --> FASTA --> NEXUS --> Haplotype networks
 
-1. Creation of the multi-fasta file: aligned single-sample FASTA files were extracted from each singular vcf using the **bcftools consensus** command, with specifications to:
+1. Creation of the multi-fasta file: aligned single-sample FASTA files were extracted from each singular vcf using the **bcftools consensus** command and then concantenated in a multi-sample FASTA file. The bcftools consensus specifications are:
 
 (a) make the absence of data visible (noted with _, but our dataset with WGS only had the first base missing in some samples in the mitogenome).
 
