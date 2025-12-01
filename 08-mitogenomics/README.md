@@ -23,4 +23,4 @@ done
    
 3. Imported in **DnaSP**, calculated haplotypes and exported as nexus. Manually added a traits block for the creation of population-informative haplotype network in PopART. An example of the file to be imported to popart is included here.
 
-4. The haplotype network was constructed in **popart-1.7** under minimum spanning / median joining, and was manually edited for colouration and position of the nodes. This worklfow makes it possible to visualise the haplotypes in map version, with a piechart for each population.
+4. The haplotype network was constructed in **popart-1.7** under minimum spanning / median joining, and was manually edited for colouration and position of the nodes. This worklfow makes it possible to visualise the haplotypes in map version as well, with a piechart for each population.
