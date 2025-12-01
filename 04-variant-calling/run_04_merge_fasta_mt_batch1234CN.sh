@@ -34,6 +34,7 @@ for vcf in "${samples[@]}"; do
  tr -d '[a-z]' | \
  sed "1s/.*/>$sample_name/" \
  > "$OUT_DIR/${sample_name}_indel.fasta"
+
 done
 
 echo "All sample FASTAs generated."
