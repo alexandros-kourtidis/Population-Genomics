@@ -17,8 +17,7 @@ bcftools consensus \
   --mark-ins lc \ #insertions
   "$vcf" | \
  tr -d '[a-z]' | \
- sed "1s/.*/>$sample_name/" \
- > "$OUT_DIR/${sample_name}_indel.fasta"
+ sed "1s/.*/>$sample_name/" > "$OUT_DIR/${sample_name}_indel.fasta"
 done
 
 2. Curation was done manually in **MEGA12** and exported as FASTA. Manually removed ambiguous sites (like Y, R, W, X, ...).
