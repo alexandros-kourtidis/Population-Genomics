@@ -8,10 +8,11 @@ suppressPackageStartupMessages({
 })
 
 # --- Parameters (edit as needed) ---
-gwas_file <- "batch1234_plink_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
-scaffold_file <- "scaffold_lengths.txt"                         # Scaffold lengths from VCF header
-output_png <- "manhattan_plot.png"                           # Output image
-downsample <- 1e5                                        # number of SNPs to plot; set NULL to plot all
+phenotype <- "b12kris_05ugL"
+gwas_file <- "phenotype_b12kris_05ugL_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
+output_png <- paste0("manhattan_plot_", phenotype, ".png")                     # Output image
+scaffold_file <- "scaffold_lengths.txt"                           # Scaffold lengths from VCF header
+downsample <- 1e5                                            # number of SNPs to plot; set NULL to plot all
 
 # --- Load scaffold lengths ---
 scaffolds <- fread(scaffold_file)[, 1:2]
@@ -69,7 +70,7 @@ ggplot(gwas_plot, aes(x = pos_cum, y = -log10(p_wald))) +
   geom_hline(yintercept = nominal_log, color = "red", linetype = "dashed") +
   theme_minimal() +
   labs(
-    title = "Manhattan Plot: Daphnia magna GWAS",
+    title = paste0("Manhattan plot: D. magna ", phenotype, " GWAS"),
     x = "Scaffold",
     y = expression(-log[10](p))
   ) +
