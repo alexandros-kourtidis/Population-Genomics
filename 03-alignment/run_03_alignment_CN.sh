@@ -25,7 +25,7 @@ samples=(CN_W1_1)
 OUT_DIR="CN_alignments"
 REF="/lustre1/scratch/363/vsc36396/lrv_ref/DmagnaLRV01.fasta"
  
-# don't forget to index the reference genome - this is done only once
+# don't forget to index the reference genome both with BWA and SAMtools before!
 # Run BWA mapping - mem is the best choice for our DNB data
 bwa mem -t 10 -M $REF \
         $(echo "${samples[ID]}")/$(echo "${samples[ID]}")_1_trimmed.fq.gz  \
@@ -36,7 +36,7 @@ bwa mem -t 10 -M $REF \
 samtools view -f 0x02 -q 20 -b $OUT_DIR/$(echo "${samples[ID]}")_aligned.bam > $OUT_DIR/$(echo "${samples[ID]}")_aligned.filtered.bam
  
 # Sort using samtools
-samtools sort @ 10 $OUT_DIR/$(echo "${samples[ID]}")_aligned.filtered.bam -o $OUT_DIR/$(echo "${samples[ID]}")_aligned.sorted.bam
+samtools sort -@ 10 $OUT_DIR/$(echo "${samples[ID]}")_aligned.filtered.bam -o $OUT_DIR/$(echo "${samples[ID]}")_aligned.sorted.bam
  
 # Remove PCR duplicates
 java -jar /vsc-hard-mounts/leuven-data/363/vsc36396/programs/picard_old.jar MarkDuplicates \
