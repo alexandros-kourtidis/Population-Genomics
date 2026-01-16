@@ -3,7 +3,7 @@
 #SBATCH --cluster=genius
 #SBATCH --job-name=renaming
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=3
+#SBATCH --ntasks-per-node=1
 #SBATCH --time=01:00:00
 #SBATCH -A lp_svbelleghem
 #SBATCH --array=2-36 # Make sure the array size matches your sample count (1-36)
