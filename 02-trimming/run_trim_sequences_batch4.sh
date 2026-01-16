@@ -4,6 +4,7 @@
 #SBATCH --job-name=trim
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
 #SBATCH --time=05:00:00
 #SBATCH -A lp_svbelleghem
 #SBATCH --array=1-97 # Make sure the array size matches your sample count
