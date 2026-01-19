@@ -24,6 +24,7 @@ mkdir -p /lustre1/scratch/363/vsc36396/sf2/VCFs
 	# Variables
 IN_DIR="CN_alignments"
 OUT_DIR="VCFs"
+VCF="CN_DmagnaLRV01"
 REF=/lustre1/scratch/363/vsc36396/lrv_ref/DmagnaLRV01.fasta
 
 	#This variable will store the job array number minus 1, so we can use it to get a sample from the samples list (index starts at 0)
@@ -46,6 +47,7 @@ eval command="\$ALL_LIST"
 	# run mpileup
 	# Non-variant sites are included.
 	# Will include both allelic and total depths (AD and DP), and the output format will be GT:GQ:GP (genotype: genotype quality: genotype posterior probability)
-bcftools mpileup -Ou --threads 10 -f $REF -r ${chrom[$ID]} $(echo $command) -a AD,DP | bcftools call --threads 10 -A -m -O z -f GQ,GP -o $OUT_DIR/CN_DmagnaLRV01_${chrom[$ID]}.vcf.gz
+bcftools mpileup -Ou --threads 10 -f $REF -r ${chrom[$ID]} $(echo $command) -a AD,DP | \
+bcftools call -m -O z --threads 10 -A -f GQ,GP -o $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
  
 echo "genotyping done"
