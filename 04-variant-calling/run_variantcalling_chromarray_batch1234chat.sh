@@ -24,7 +24,7 @@ ID=$((SLURM_ARRAY_TASK_ID -1))
 cd /lustre1/scratch/363/vsc36396/alignments_all
 mkdir -p /lustre1/scratch/363/vsc36396/alignments_all/VCFs
 
-OUT_FOLDER=/lustre1/scratch/363/vsc36396/alignments_all/VCFs
+OUT_DIR=/lustre1/scratch/363/vsc36396/alignments_all/VCFs
 INPUT="batch1234chat_DmagnaLRV01"
 REF=/lustre1/scratch/363/vsc36396/reference_chaturvedi/reference.fasta
 
