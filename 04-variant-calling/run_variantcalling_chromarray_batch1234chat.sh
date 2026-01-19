@@ -22,16 +22,14 @@ ID=$((SLURM_ARRAY_TASK_ID -1))
 
 	# Paths and variables
 cd /lustre1/scratch/363/vsc36396/alignments_all
-mkdir -p /lustre1/scratch/363/vsc36396/alignments_all/VCFs
-
-OUT_DIR=/lustre1/scratch/363/vsc36396/alignments_all/VCFs
-INPUT="batch1234chat_DmagnaLRV01"
+IN_DIR=.
+OUT_DIR="VCFs"
+mkdir -p $OUT_DIR
+VCF="batch1234chat_DmagnaLRV01"
 REF=/lustre1/scratch/363/vsc36396/reference_chaturvedi/reference.fasta
 
-	# Chromosome names
+	# Chromosome names and sample IDs
 chrom=(scaffold_1 scaffold_2 scaffold_3 scaffold_4 scaffold_5 scaffold_6 scaffold_7 scaffold_8 scaffold_9 scaffold_10 scaffold_11 scaffold_12 scaffold_13 scaffold_14)
-
-	# Sample IDs
 samples=($(cat /vsc-hard-mounts/leuven-data/363/vsc36396/scripts/batch1234chat_list_sequence.txt))
  
 	# make a single list of all the samples that can be used in the samtools command
@@ -47,6 +45,13 @@ eval command="\$ALL_LIST"
 	# run mpileup
 	# Non-variant sites are included.
 	# Will include both allelic and total depths (AD and DP), and the output format will be GT:GQ:GP (genotype: genotype quality: genotype posterior probability)
-bcftools mpileup -Ou --threads 16 -f $REF -r ${chrom[$ID]} $(echo $command) -a AD,DP | bcftools call -m -O z -f GQ,GP -o ${OUT_FOLDER}/${INPUT}_${chrom[$ID]}.vcf.gz
+bcftools mpileup -Ou --threads 16 -f $REF -r ${chrom[$ID]} $(echo $command) -a AD,DP | \
+bcftools call -m -O z --threads 16 -f GQ,GP -o ${OUT_DIR}/${VCF}_${chrom[$ID]}.vcf.gz
+
+	# Index the VCFs
+bcftools index $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
+
+	#Calculate missing data for each individual/sample and prints it to an out.imiss file
+vcftools --gzvcf $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz --missing-indv --out $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
  
 echo "genotyping done"
