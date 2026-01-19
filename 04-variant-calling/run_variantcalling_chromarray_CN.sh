@@ -49,5 +49,11 @@ eval command="\$ALL_LIST"
 	# Will include both allelic and total depths (AD and DP), and the output format will be GT:GQ:GP (genotype: genotype quality: genotype posterior probability)
 bcftools mpileup -Ou --threads 10 -f $REF -r ${chrom[$ID]} $(echo $command) -a AD,DP | \
 bcftools call -m -O z --threads 10 -A -f GQ,GP -o $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
- 
+
+	# Index the VCFs
+bcftools index $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
+
+	#Calculate missing data for each individual/sample and prints it to an out.imiss file
+vcftools --gzvcf $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz --missing-indv --out $OUT_DIR/${VCF}_${chrom[$ID]}.vcf.gz
+
 echo "genotyping done"
