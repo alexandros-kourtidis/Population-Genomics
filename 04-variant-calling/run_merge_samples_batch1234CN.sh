@@ -20,15 +20,16 @@ cd /lustre1/scratch/363/vsc36396
 VCF_1="batch1234_DmagnaLRV01_merged1_10"
 VCF_2="sf2/VCFs/CN_DmagnaLRV01_merged1_10"
 VCF="batch1234CN_DmagnaLRV01_merged1_10"
+OUT_DIR="sf2/VCFs/"
 
 	# Index your VCF files (if not already done so)
 tabix -p vcf ${VCF_1}.vcf.gz
 tabix -p vcf ${VCF_2}.vcf.gz
 
 	# Merge the VCFs of different samples ( into a single VCF file.
-bcftools merge --threads 16 ${VCF_1}.vcf.gz ${VCF_2}.vcf.gz -o sf2/VCFs/${VCF}.vcf.gz -O z
+bcftools merge --threads 16 ${VCF_1}.vcf.gz ${VCF_2}.vcf.gz -o ${OUT_DIR}${VCF}.vcf.gz -O z
 
 	#Calculate missing data for each individual/sample and prints it to an out.imiss file
-vcftools --gzvcf ${VCF}.vcf.gz --missing-indv --out ${VCF}
+vcftools --gzvcf ${OUT_DIR}${VCF}.vcf.gz --missing-indv --out $OUT_DIR${VCF}
 
 echo "merging and missingess count is done!"
