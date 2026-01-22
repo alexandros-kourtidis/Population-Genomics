@@ -13,6 +13,11 @@
 #  Filtering, polarising and parsing VCF per population for Sweepfinder2 keeping non-variant sites: 
 #   indel removal; callinng quality (QUAL, all sites); biallelic only; missingness in population;
 #   genotype quality (GQ, only on non-variant sites); sequencing depth (DP, all sites); 
+#   GitHub pages:
+#	https://github.com/kullrich/bio-scripts/blob/master/vcf/polarizeVCFbyOutgroup.py
+#	https://github.com/simonhmartin/genomics_general/blob/master/VCF_processing/parseVCF.py
+#	https://github.com/simonhmartin/genomics_general/blob/master/genomics.py
+#	https://github.com/simonhmartin/genomics_general/blob/master/filterGenotypes.py
 # -------------------------------------------------------------------------------
 
 # Load the programs we will use
@@ -47,29 +52,56 @@ if [[ ! -f "$IN_VCF" ]]; then
   echo "ERROR: Input VCF not found: $IN_VCF" >&2
   exit 1
 fi
-FILT_VCF="$TMP_DIR/${pop}_CN.filtered.vcf.gz"
-GT_VCF="$TMP_DIR/${pop}_CN.filtered.gtonly.vcf.gz"
-POL_VCF="$TMP_DIR/${pop}_CN.polarized.vcf.gz"
+FILT_VCF="$TMP_DIR/${pop}_CN3.filtered.vcf.gz"
+GT_VCF="$TMP_DIR/${pop}_CN3.filtered.gtonly.vcf.gz"
+POL_VCF="$TMP_DIR/${pop}_CN3.polarized.vcf.gz"
 CALLS_OUT="$OUT_DIR/${pop}_CN.filtered.diplo.calls"
 OUTGROUP="CN_alignments/CN_W1_1_aligned.sorted.nd.bam"
 
 # -------------------------------------------------------------------------------
 # 1) Filter with bcftools (reduce size but keep non-variant sites)
-#    - remove indels, require biallelic (<=2 alleles)
-#    - keep SNPs + REF sites
-#    - apply QUAL and missingness filter to variant sites only
-#      (reference-only sites pass regardless of QUAL)
+#    - biallelic (<=2 alleles)
+#    - removes indels, keep SNPs AND nonvariant sites with -V indels (!)
+#    - apply QUAL and missingness filter
 # -------------------------------------------------------------------------------
 
 echo "[${pop}] Step 1: bcftools filtering"
 
+#------------
+# new: first remove sites that are indels, non-biallelic, and low QUAL
+#	then mask genotypes that have low read depth and SNPs that have low GQ
+#	then remove sites that are absent in 75% of samples or more.
+#------------ 
+
 bcftools view \
 	-M2 \
-	--types snps,ref \
-	-i 'QUAL>=10 && F_MISSING<=0.75' \
-	-Oz -o "$FILT_VCF" \
-	"$IN_VCF"
+	-V indels \
+	-i 'QUAL>=10' \
+	-Ou \
+	"$IN_VCF" \
+| \
+bcftools +setGT -- \
+	-t q \
+	-n . \
+	-i 'FMT/DP<10 || (TYPE="snp" && FMT/GQ<30)' \
+| \
+bcftools view \
+	-i 'F_MISSING<=0.75' \
+	-Oz \
+	-o "$FILT_VCF"
+zcat "$FILT_VCF" > "${TMP_DIR}/A1_test3.vcf"
 bcftools index -t "$FILT_VCF"
+
+
+#-----
+# old
+#-----
+# bcftools view \
+#	-M2 \
+#	-V indels \
+#	-i 'QUAL>=10 && F_MISSING<=0.75 && MIN(FMT/DP)>=10 && ((TYPE="snp" && MIN(FMT/GQ)>=30) || TYPE!="snp")' \
+#	-Oz -o "$FILT_VCF" \
+#	"$IN_VCF"
 
 
 # -------------------------------------------------------------------------------
