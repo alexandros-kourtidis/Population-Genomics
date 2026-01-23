@@ -8,32 +8,30 @@
 #SBATCH --time=24:00:00
 #SBATCH -A lp_svbelleghem
 
-############################
-# User-configurable inputs #
-############################
-PHENO="phenotype_b12kris_07ugL"		# Tab-delimited file prefix. Header must include: FID, IID, Phenotype
-PHENO_COL="Phenotype"           # Column header of the phenotype values in PHENO
-GENO="batch1234_plink"
 
-#####################
-# Environment setup #
-#####################
+# Environment setup 
+
 module load tabix/0.2.6-GCCcore-6.4.0
 module load PLINK/2.0.0-a.6.9-gfbf-2024a
-
-# GEMMA environment
 source /vsc-hard-mounts/leuven-data/363/vsc36396/miniconda3/etc/profile.d/conda.sh
 conda activate gemma
 
-#########################
-# 0) Prep output dirs   #
-#########################
+# Output dirs   
+
 cd /lustre1/scratch/363/vsc36396/gemma
 mkdir -p kinship_matrix gemma_results logs
 
-#########################################################
-# 1) Clean the names in PLINK (A1_AnOudin_C02 -> A1C02) #
-#########################################################
+# Inputs 
+
+PHENO="phenotype_b12kris_A5B1_07ugL"		# Tab-delimited file prefix. Header must include: FID, IID, Phenotype
+PHENO_COL="Phenotype"           # Column header of the phenotype values in PHENO
+GENO="batch1234_plink"
+
+
+#-------------------------------------------------------------
+# 1) Clean the names in PLINK (eg: A1_AnOudin_C02 -> A1C02) 
+#-------------------------------------------------------------
+
 #plink \
 #  --bfile $GENO \
 #  --allow-extra-chr \
@@ -44,11 +42,12 @@ mkdir -p kinship_matrix gemma_results logs
 #  --make-bed \
 #  --out ${GENO}_renamed
 
-##############################################################
-# 2) Build a keep list of samples with NON-missing phenotype #
-##############################################################
+#-------------------------------------------------------------
+# 2) Build a keep list of samples with NON-missing phenotype 
 #   - Reads FID/IID/PHENO_COL from Phenotype.txt
 #   - Skips NA/blank/-9 phenotypes
+#-------------------------------------------------------------
+
 awk -v phcol="${PHENO_COL}" 'BEGIN{FS=OFS="\t"}
 NR==1{
   for(i=1;i<=NF;i++){
@@ -72,9 +71,10 @@ if [ ! -s keep_phenotyped.txt ]; then
   exit 1
 fi
 
-#######################################################
-# 3) Subset to phenotyped samples, then add phenotype #
-#######################################################
+#-------------------------------------------------------------
+# 3) Subset to phenotyped samples, then add phenotype 
+#-------------------------------------------------------------
+
 # Subset to the intersection of genotypes and valid phenotypes
 plink \
   --bfile ${GENO}_renamed \
@@ -96,9 +96,9 @@ plink \
   --out ${PHENO}_gwas_input \
   > logs/step3b_plink_add_pheno.log 2>&1
 
-################################
-# 4) Missingness (diagnostics) #
-################################
+#-------------------------------------------------------------
+# 4) Missingness (diagnostics) 
+#-------------------------------------------------------------
 plink \
   --bfile ${PHENO}_gwas_input \
   --missing \
@@ -107,9 +107,9 @@ plink \
   --out ${PHENO}_missing_check \
   > logs/step4_missingness.log 2>&1
 
-#################################
-# 5) Kinship on phenotyped set  #
-#################################
+#-------------------------------------------------------------
+# 5) Kinship on phenotyped set  
+#-------------------------------------------------------------
 gemma \
   -bfile ${PHENO}_gwas_input \
   -gk 1 \
@@ -117,9 +117,9 @@ gemma \
   -o "${PHENO}_gwas_input" \
   > logs/step6_gemma_gk.log 2>&1
 
-################################
-# 6) GEMMA LMM (no covariates) #
-################################
+#-------------------------------------------------------------
+# 6) GEMMA LMM (no covariates) 
+#-------------------------------------------------------------
 gemma \
   -bfile "${PHENO}_gwas_input" \
   -k "kinship_matrix/${PHENO}_gwas_input.cXX.txt" \
