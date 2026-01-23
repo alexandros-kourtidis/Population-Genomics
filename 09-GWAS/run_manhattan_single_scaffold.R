@@ -13,7 +13,7 @@ phenotype <- "b12kris_A5B1_07ugL"
 scaffold_to_plot <- 8 
 gwas_file      <- "gemma_results/phenotype_b12kris_A5B1_07ugL_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
 scaffold_file  <- "scaffold_lengths.txt"                                # Scaffold lengths (two columns: name, length_bp)
-output_png <- paste0("plots/manhattan_plot_", phenotype, "scaffold_", scaffold_to_plot, ".png")                     # Output image
+output_png <- paste0("plots/manhattan_plot_", phenotype, "_scaffold_", scaffold_to_plot, ".png")                     # Output image
 downsample     <- 1e5                                                  # e.g., 1e5, or NULL to plot all
                                                   # can be 6, "6", or "scaffold_6"
 
@@ -109,4 +109,5 @@ ggplot(gwas_plot, aes(x = pos_cum, y = -log10(p_wald))) +
   )
 
 dev.off()
+
 
