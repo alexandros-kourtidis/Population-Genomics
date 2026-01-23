@@ -9,11 +9,13 @@ suppressPackageStartupMessages({
 })
 
 # --- Parameters (edit as needed) ---
-gwas_file      <- "batch1234_plink_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
+phenotype <- "b12kris_A5B1_07ugL"
+scaffold_to_plot <- 8 
+gwas_file      <- "gemma_results/phenotype_b12kris_A5B1_07ugL_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
 scaffold_file  <- "scaffold_lengths.txt"                                # Scaffold lengths (two columns: name, length_bp)
-output_png     <- "manhattan_plot_scaffold6.png"                        # Output image
+output_png <- paste0("plots/manhattan_plot_", phenotype, "scaffold_", scaffold_to_plot, ".png")                     # Output image
 downsample     <- 1e5                                                  # e.g., 1e5, or NULL to plot all
-scaffold_to_plot <- 6                                                   # can be 6, "6", or "scaffold_6"
+                                                  # can be 6, "6", or "scaffold_6"
 
 # --- Helper: normalize scaffold name to match data ---
 normalize_scaffold <- function(x, scaffold_names) {
@@ -95,7 +97,7 @@ ggplot(gwas_plot, aes(x = pos_cum, y = -log10(p_wald))) +
   geom_hline(yintercept = nominal_log, color = "red", linetype = "dashed") +
   theme_minimal() +
   labs(
-    title = paste("Manhattan Plot (single scaffold):", scaffold_name),
+    title = paste("Manhattan Plot:", phenotype, ", ", scaffold_name),
     x = "Scaffold",
     y = expression(-log[10](p))
   ) +
