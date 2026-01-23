@@ -97,18 +97,7 @@ plink \
   > logs/step3b_plink_add_pheno.log 2>&1
 
 #-------------------------------------------------------------
-# 4) Missingness (diagnostics) 
-#-------------------------------------------------------------
-plink \
-  --bfile ${PHENO}_gwas_input \
-  --missing \
-  --allow-extra-chr \
-  --allow-no-sex \
-  --out ${PHENO}_missing_check \
-  > logs/step4_missingness.log 2>&1
-
-#-------------------------------------------------------------
-# 5) Kinship on phenotyped set  
+# 4) Kinship on phenotyped set  
 #-------------------------------------------------------------
 gemma \
   -bfile ${PHENO}_gwas_input \
@@ -118,7 +107,7 @@ gemma \
   > logs/step6_gemma_gk.log 2>&1
 
 #-------------------------------------------------------------
-# 6) GEMMA LMM (no covariates) 
+# 5) GEMMA LMM (no covariates) 
 #-------------------------------------------------------------
 gemma \
   -bfile "${PHENO}_gwas_input" \
