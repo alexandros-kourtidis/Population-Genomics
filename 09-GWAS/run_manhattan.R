@@ -8,9 +8,9 @@ suppressPackageStartupMessages({
 })
 
 # --- Parameters (edit as needed) ---
-phenotype <- "b12kris_05ugL"
-gwas_file <- "phenotype_b12kris_05ugL_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
-output_png <- paste0("manhattan_plot_", phenotype, ".png")                     # Output image
+phenotype <- "b12kris_A5B1_07ugL"
+gwas_file <- "gemma_results/phenotype_b12kris_A5B1_07ugL_gemma_lmm_results_nocov.assoc.txt"  # GEMMA output
+output_png <- paste0("plots/manhattan_plot_", phenotype, ".png")                     # Output image
 scaffold_file <- "scaffold_lengths.txt"                           # Scaffold lengths from VCF header
 downsample <- 1e5                                            # number of SNPs to plot; set NULL to plot all
 
