@@ -12,7 +12,7 @@
 # -------------------------------------------------------------------------------
 #  Filtering, polarising and parsing VCF per population for Sweepfinder2 keeping non-variant sites: 
 #   indel removal; callinng quality (QUAL, all sites); biallelic only; missingness in population;
-#   genotype quality (GQ, only on non-variant sites); sequencing depth (DP, all sites); 
+#   genotype quality (GQ, only on variant sites); sequencing depth (DP, all sites); 
 #   GitHub pages:
 #	https://github.com/kullrich/bio-scripts/blob/master/vcf/polarizeVCFbyOutgroup.py
 #	https://github.com/simonhmartin/genomics_general/blob/master/VCF_processing/parseVCF.py
@@ -31,7 +31,7 @@ cd /lustre1/scratch/363/vsc36396/sf2
 
 	# Population IDs
 pops=( \
-	A1_test A1_AnOudin A2_BuSN A3_Mech A4_PL15_YEL A5_GenM \
+	A1_AnOudin A2_BuSN A3_Mech A4_PL15_YEL A5_GenM \
 	B1_BKN1 B2_OM2 B3_ZW B4_OHZ B5_DA2 \
 	C1_BlfN C2_MO C3_Ter1 C4_BW_48630 C5_BW_36962 \
 	D1_CBOO6 D2_LRV D3_BKLE5 D4_BW_62256 D5_BW_22050\
@@ -52,26 +52,25 @@ if [[ ! -f "$IN_VCF" ]]; then
   echo "ERROR: Input VCF not found: $IN_VCF" >&2
   exit 1
 fi
-FILT_VCF="$TMP_DIR/${pop}_CN3.filtered.vcf.gz"
-GT_VCF="$TMP_DIR/${pop}_CN3.filtered.gtonly.vcf.gz"
-POL_VCF="$TMP_DIR/${pop}_CN3.polarized.vcf.gz"
-CALLS_OUT="$OUT_DIR/${pop}_CN.filtered.diplo.calls"
+FILT_VCF="$TMP_DIR/${pop}_CN.filtered.vcf.gz"
+GT_VCF="$TMP_DIR/${pop}_CN.filtered.gtonly.vcf.gz"
+POL_VCF="$TMP_DIR/${pop}_CN.polarized.vcf.gz"
+CALLS_OUT="$OUT_DIR/${pop}.filtered.diplo.calls"
 OUTGROUP="CN_alignments/CN_W1_1_aligned.sorted.nd.bam"
 
 # -------------------------------------------------------------------------------
 # 1) Filter with bcftools (reduce size but keep non-variant sites)
+#   site-level:
 #    - biallelic (<=2 alleles)
-#    - removes indels, keep SNPs AND nonvariant sites with -V indels (!)
-#    - apply QUAL and missingness filter
+#    - removes indels, keep SNPs AND invariant sites with -V indels (!)
+#    - apply QUAL filter
+#   genotype-level:
+#    - mask genotypes that have low read depth and SNPs that have low GQ
+#   site-level:
+#    - remove sites that are absent in 50% of samples or more.
 # -------------------------------------------------------------------------------
 
 echo "[${pop}] Step 1: bcftools filtering"
-
-#------------
-# new: first remove sites that are indels, non-biallelic, and low QUAL
-#	then mask genotypes that have low read depth and SNPs that have low GQ
-#	then remove sites that are absent in 75% of samples or more.
-#------------ 
 
 bcftools view \
 	-M2 \
@@ -83,25 +82,14 @@ bcftools view \
 bcftools +setGT -- \
 	-t q \
 	-n . \
-	-i 'FMT/DP<10 || (TYPE="snp" && FMT/GQ<30)' \
+	-i '(FMT/DP<8) || (ALT!="." && FMT/GQ<30)' \
 | \
 bcftools view \
-	-i 'F_MISSING<=0.75' \
+	-i 'F_MISSING<=0.50' \
 	-Oz \
 	-o "$FILT_VCF"
-zcat "$FILT_VCF" > "${TMP_DIR}/A1_test3.vcf"
+#zcat "$FILT_VCF" > "${TMP_DIR}/A1_test6.vcf"
 bcftools index -t "$FILT_VCF"
-
-
-#-----
-# old
-#-----
-# bcftools view \
-#	-M2 \
-#	-V indels \
-#	-i 'QUAL>=10 && F_MISSING<=0.75 && MIN(FMT/DP)>=10 && ((TYPE="snp" && MIN(FMT/GQ)>=30) || TYPE!="snp")' \
-#	-Oz -o "$FILT_VCF" \
-#	"$IN_VCF"
 
 
 # -------------------------------------------------------------------------------
@@ -133,26 +121,18 @@ python polarizeVCFbyOutgroup.py \
 	-ind "${OUTGROUP}" \
 	-add 
 
-# bcftools index -t "$POL_VCF" 
-
 # -------------------------------------------------------------------------------
-# 4) Parse and filter genotypes with custom scripts, then convert to diploid
-#    Notes:
-#    - --gtf GQ filters will be applied (as configured) by your parser
-#    - --skipIndels is harmless here since indels are already removed
+# 4) Parse (and filter) genotypes with custom scripts, then convert to diploid
+#    Note:
+#    - omitted filtering step - you can't filter on flags since changed to gt only for the polarisation
 # -------------------------------------------------------------------------------
 
 echo "[${pop}] Step 4: parsing & genotype filtering"
 
 python parseVCF.py \
-	--gtf flag=GQ min=30 gtTypes=Het \
-	--gtf flag=GQ min=30 gtTypes=HomAlt \
-	--gtf flag=DP min=10 \
-	--skipIndels \
 	-i "$POL_VCF" \
 	| python filterGenotypes.py -if phased -of diplo \
 	> "$CALLS_OUT"
-
 
 # -------------------------------------------------------------------------------
 # 5) Clean sample names in the final calls
