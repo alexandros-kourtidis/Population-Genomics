@@ -46,7 +46,7 @@ mkdir -p "$OUT_DIR"
 # -------------------------------------------------------------------------------
 
 if [[ ! -f "$GLOBAL_SFS" || ! -f "$GLOBAL_ALLSCAFF" ]]; then
-    echo "Global SFS files not found — creating them now..."
+    echo "Global SFS files not found â€” creating them now..."
 
 { head -n 1 $IN_DIR/out.${pop}_${scaffolds[0]}.sweepfinder.input; \
 	tail -n +2 -q $IN_DIR/*.input; } > $IN_DIR/${pop}_allscaffolds.sweepfinder.input  
@@ -57,7 +57,7 @@ if [[ ! -f "$GLOBAL_SFS" || ! -f "$GLOBAL_ALLSCAFF" ]]; then
 
 echo "Global SFS files created."
 else
-echo "Global SFS already exists — skipping creation."
+echo "Global SFS already exists â€” skipping creation."
 fi
 
 # -------------------------------------------------------------------------------
