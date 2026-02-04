@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --time=48:00:00
 #SBATCH -A lp_svbelleghem
-#SBATCH --array=1 	# 20 populations
+#SBATCH --array=2-20 	# 20 populations
  
 # -------------------------------------------------------------------------------
 #	Environment setup
@@ -62,7 +62,7 @@ samples=${populationsamples[$((SLURM_ARRAY_TASK_ID - 1))]}
 
 	# Output directories
 CAL_DIR="final_calls"
-OUT_DIR="input_files"
+OUT_DIR="input_files/${pop}"
 CAL_FILE="$CAL_DIR/${pop}.filtered.diplo.calls"
 OUT_FILE="$OUT_DIR/out"
 
