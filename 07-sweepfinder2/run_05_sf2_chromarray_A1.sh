@@ -1,7 +1,7 @@
 #!/bin/bash -l
  
 #SBATCH --cluster=genius
-#SBATCH --job-name=sf2_A1_AnOudin
+#SBATCH --job-name=sf2_A1
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=48:00:00
@@ -37,9 +37,9 @@ scaffolds=(scaffold_1 scaffold_2 scaffold_3 scaffold_4 scaffold_5 scaffold_6 sca
 scaf=${scaffolds[$((SLURM_ARRAY_TASK_ID - 1))]}
 pop="A1_AnOudin"
 
-IN_DIR="input_files"
+IN_DIR="input_files/${pop}"
 FILTER_DIR="${IN_DIR}/filtered"
-OUT_DIR="output_files"
+OUT_DIR="output_files/${pop}"
 
 mkdir -p "$OUT_DIR" "$FILTER_DIR"
 
