@@ -26,6 +26,8 @@ echo "================="
 #	 - 20 strings of every sample for each pop (e.g. A1="A1_AnOudin[A1_AnOudin_C02_combined,...,A1_AnOudin_C39]")
 #		and the outgroup for polarisation: (e.g., A1="...;OG[CN_alignments/CN_W1_1]")
 #	 - 1 string (e.g. populationsampoles=(A1 A2 ...) including the 20 strings (like pops= ...)
+#	! Seperate variable assignment for the filtering step !
+#	   It needs an assignment insde the loop
 # -------------------------------------------------------------------------------
 
 cd /lustre1/scratch/363/vsc36396/sf2
@@ -63,10 +65,12 @@ samples=${populationsamples[$((SLURM_ARRAY_TASK_ID - 1))]}
 	# Output directories
 CAL_DIR="final_calls"
 OUT_DIR="input_files/${pop}"
+FILTER_DIR="$OUT_DIR/filtered"
+
 CAL_FILE="$CAL_DIR/${pop}.filtered.diplo.calls"
 OUT_FILE="$OUT_DIR/out"
 
-mkdir -p "$OUT_DIR"
+mkdir -p "$OUT_DIR" "$FILTER_DIR"
 
 # -------------------------------------------------------------------------------
 #	Create input files for Sweepfinder2 using custom script
@@ -76,17 +80,59 @@ mkdir -p "$OUT_DIR"
 #	- github of the script: https://github.com/StevenVB12/Genomics/blob/master/PAN_SV_chromatin_Genomics/sweepfinder/sweepfinder_input.py
 # -------------------------------------------------------------------------------
 
-python sweepfinder_input.py \
-	-i $CAL_FILE \
-	-p "$samples" \
-	-c scaffold_1,scaffold_2,scaffold_3,scaffold_4,scaffold_5,scaffold_6,scaffold_7,scaffold_8,scaffold_9,scaffold_10 \
-	-O OG \
-	-o $OUT_FILE \
-	--addMono \
-	--addMonoall \
-	--polarized
+#python sweepfinder_input.py \
+#	-i $CAL_FILE \
+#	-p "$samples" \
+#	-c scaffold_1,scaffold_2,scaffold_3,scaffold_4,scaffold_5,scaffold_6,scaffold_7,scaffold_8,scaffold_9,scaffold_10 \
+#	-O OG \
+#	-o $OUT_FILE \
+#	--addMono \
+#	--addMonoall \
+#	--polarized
 	
-	echo "Sweepfinder's input files have been generated"
+#	echo "Sweepfinder's input files have been generated"
 
+# -------------------------------------------------------------------------------
+#	Filter ancestral invariant sites.
+# -------------------------------------------------------------------------------
+#	- Keeps header, polymorphisms and fixed-derived substitutions.
+#	Suggestion based on Huber et al. (2015) and the SF2 manual
+# -------------------------------------------------------------------------------
 
-#echo "filtering is done"
+	# List of scaffolds
+scaffolds=(scaffold_1 scaffold_2 scaffold_3 scaffold_4 scaffold_5 scaffold_6 scaffold_7 scaffold_8 scaffold_9 scaffold_10)
+
+	# Function to filter out x=0 sites
+filter_sf2_input () {
+    local in="$1"
+    local out="$2"
+    awk 'NR==1 || $2>0' "$in" > "$out"
+}
+
+echo "Filtering SweepFinder2 input for population: $pop"
+
+	# Go through the loop for each chromosome
+for scaf in "${scaffolds[@]}"; do
+
+    IN_FILE="${OUT_DIR}/out.${pop}_${scaf}.sweepfinder.input"
+    FILTERED_FILE="${FILTER_DIR}/out.${pop}_${scaf}.sweepfinder.filtered.input"
+
+	# Check input exists
+    if [[ ! -f "$IN_FILE" ]]; then
+        echo "WARNING: Input file not found: $IN_FILE"
+        continue
+    fi
+
+	# Do the filtering
+echo "Filtering $scaf for population $pop"
+
+ total=$(wc -l < "$IN_FILE" || echo 0)
+ x0=$(awk 'NR>1 && $2==0{c++} END{print c+0}' "$IN_FILE")
+
+filter_sf2_input "$IN_FILE" "$FILTERED_FILE"
+ kept=$(wc -l < "$FILTERED_FILE" || echo 0)
+
+echo "[${scaf}] original rows: $total ; x=0 rows: $x0 ; kept: $kept"
+
+done
+
