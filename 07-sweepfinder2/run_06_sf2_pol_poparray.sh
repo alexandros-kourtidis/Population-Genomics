@@ -12,9 +12,7 @@ set -euo pipefail
 
 # -------------------------------------------------------------------------------
 # Runs polarized SweepFinder2 per population, iterating over all scaffolds.
-# Notes:
-# - Each array task handles a single population.
-# - Global/empirical SFS is created once per population (if not already present).
+# Note:
 # - sf2 doesn't support multithreading, so we loop sequentially over scaffolds.
 # -------------------------------------------------------------------------------
 
@@ -72,7 +70,7 @@ for scaf in "${scaffolds[@]}"; do
     OUT_FILE="${OUT_DIR}/${pop}_${scaf}_wglsfs.sf2.out"
 
     if [[ ! -s "$FILTERED_FILE" ]]; then
-        echo "[${pop} | ${scaf}] WARNING: Missing filtered input: $FILTERED_FILE — skipping."
+        echo "[${pop} | ${scaf}] WARNING: Missing filtered input: $FILTERED_FILE â€” skipping."
         continue
     fi
 
@@ -80,7 +78,7 @@ for scaf in "${scaffolds[@]}"; do
         echo "[${pop} | ${scaf}] Output exists, replacing: $OUT_FILE"
     fi
 
-    echo "[${pop} | ${scaf}] Running SweepFinder2…"
+    echo "[${pop} | ${scaf}] Running SweepFinder2â€¦"
     /vsc-hard-mounts/leuven-data/363/vsc36396/scripts/07_sweepfinder2/SF2/SweepFinder2 -lg 500 \
         "$FILTERED_FILE" \
         "$GLOBAL_SFS" \
