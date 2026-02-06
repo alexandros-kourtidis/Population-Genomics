@@ -10,7 +10,7 @@
 set -euo pipefail
 
 # -------------------------------------------------------------------------------
-# Create a global/empirical SFS  per population.
+# Create a global/empirical SFS from the filtered input files, per population.
 # -------------------------------------------------------------------------------
 # Environment setup
 # -------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ GLOBAL_SFS="${FILTER_DIR}/${pop}_pol_globalsfs.input"
 #  The tail -n +2 removes the header line from filtered inputs
 # -------------------------------------------------------------------------------
 
-echo "[${pop}] Creating global/empirical SFS files…"
+echo "[${pop}] Creating global/empirical SFS filesâ€¦"
 
 { head -n 1 "$header_source"
 	tail -n +2 -q "${FILTER_DIR}"/out.${pop}_scaffold_*.sweepfinder.filtered.input
