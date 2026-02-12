@@ -23,7 +23,6 @@ populations <- c(
 base_dir <- "sf2_out"
 window_size <- 10000   # 10 kb
 
-
 # ================================================
 # STEP 1: COMBINE SCAFFOLD-LEVEL SF2 OUTPUTS
 # ================================================
@@ -130,9 +129,9 @@ for (pop in populations) {
 # Combine all into one long data frame
 long_df <- bind_rows(all_pops_data)
 
-# ================================
+# ========================================
 # STEP 4: CREATE PICMIN-READY INPUT
-# ================================
+# ========================================
 # We want: 
 
 library(data.table)
@@ -175,3 +174,4 @@ write.table(
   quote = FALSE,
   row.names = FALSE
 )
+
