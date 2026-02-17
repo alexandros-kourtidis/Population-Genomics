@@ -1,7 +1,71 @@
-# ==========================================
+# ==========================================================
 # PicMin
 # https://github.com/TBooker/PicMin/tree/main
-# ==========================================
+# ==========================================================
+# PicMin R Script – SLURM-Controlled Parameter Interface
+# ----------------------------------------------------------
+# This script is designed to be run from a SLURM array job. All required input parameters are supplied by the SLURM
+# submission script using command-line arguments. Nothing is hard-coded inside this R script.
+#
+# The script expects EXACTLY 10 arguments in the following order (matching the SLURM script):
+#
+#   args[1] = SCAFFOLD
+#       Name of the genomic scaffold to process. The SLURM
+#       array determines which scaffold is passed.
+#
+#   args[2] = pop_cols
+#       Comma-separated list of population column names
+#       present in the input file (no spaces). This vector
+#       is split in R and defines the population-specific
+#       p-values used by PicMin.
+#
+#   args[3] = missing_levels
+#       Comma-separated integers specifying how many
+#       populations must be present (non-missing) for each
+#       PicMin run. For each n in this list, a separate
+#       null model is generated and applied.
+#
+#   args[4] = IN_DIR
+#       Directory where the input file is located.
+#
+#   args[5] = OUT_DIR
+#       Directory where output files will be written.
+#       Created automatically if not present.
+#
+#   args[6] = infile
+#       Full path to the PicMin input file containing all
+#       scaffolds. The script subsets it based on SCAFFOLD.
+#
+#   args[7] = OUTPREFIX
+#       Prefix used when constructing the output filename.
+#       The final output file will be:
+#            <OUT_DIR>/<OUTPREFIX><SCAFFOLD>.tsv
+#
+#   args[8] = WIN_SIZE
+#       Window size used by the input dataset (e.g. 10000).
+#       This does not change PicMin internals but is kept
+#       for clarity and future flexibility.
+#
+#   args[9] = numReps
+#       Number of replicates used by PicMin for estimating
+#       the p-value for each window. Higher = more accurate.
+#
+#  args[10] = nsims
+#       Number of null simulations used to generate order-
+#       statistic correlation matrices. Larger values improve
+#       stability but increase memory usage.
+#
+# ----------------------------------------------------------
+# GENERAL NOTES:
+# - All argument parsing is strict; the script halts if the
+#   expected number of parameters is not supplied.
+# - The script constructs its output filename internally
+#   using OUTPREFIX and SCAFFOLD.
+# - No assumptions are made about job arrays; they are
+#   handled entirely by the SLURM script.
+# - Null correlation matrices are generated per missing-
+#   level category, ensuring correct PicMin inference.
+# ==========================================================
 
 rm(list = ls())
 
@@ -20,37 +84,26 @@ library(poolr)
 setwd("/lustre1/scratch/363/vsc36396/picmin")
 
 # ==========================================
-# 1) User settings
-# ------------------------------------------
-# - Specify: input/output files, population column names,
-#    window size, target scaffold, and PicMin simulation parameters.
-# - The scaffold is set as an argument from a SLURM array.
-#    Example bash SLURM array command:
-#     SC=$(sed -n "${SLURM_ARRAY_TASK_ID}p" scaffolds.txt)
-#     Rscript run_picmin_1scaff.R $SC
-#    (you can also manually define it yourself and comment out the args variable assignment)
-# - For missing_levels: nmax=npopcols. Avoid n = 2 (low power)
+# 1) USER SETTINGS
 # ==========================================
-IN_DIR		<- "input"
-OUT_DIR		<- "output"
-dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
-
-pop_cols	<- c("C1_BlfN", "C2_MO", "C3_Ter1", "C4_BW_48630", "C5_BW_36962")
-missing_levels 	<- c(3, 4, 5)
-
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 0) {
-    stop("ERROR: No scaffold argument supplied. Usage: Rscript run_picmin_1scaff.R <scaffold>")
+
+if (length(args) < 10) {
+    stop("Not enough arguments supplied. Expected 10 arguments: SCAFFOLD, POPS, MISS, IN_DIR, OUT_DIR, INFILE, OUTPREFIX, WINDOW, NUMREPS, NSIMS")
 }
-SCAFFOLD <- args[1]
 
-WIN_SIZE	<- 10000L
-numReps		<- 100000	# increase to 1e5 for final accuracy
-nsims		<- 40000	# increase to 4e4 for final accuracy
+SCAFFOLD       <- args[1]
+pop_cols       <- unlist(strsplit(args[2], ","))
+missing_levels <- as.integer(strsplit(args[3], ",")[[1]])
+IN_DIR         <- args[4]
+OUT_DIR        <- args[5]
+infile         <- args[6]
+OUTPREFIX      <- args[7]
+WIN_SIZE       <- as.integer(args[8])
+numReps        <- as.integer(args[9])
+nsims          <- as.integer(args[10])
 
-infile		<- file.path(IN_DIR, "PicMin_input_meanLR_10kb_windows_woContam.txt")
-outfile 	<- file.path(OUT_DIR, paste0("popsC1C2C3C4C5_", SCAFFOLD, ".tsv"))
-
+outfile <- file.path(OUT_DIR, paste0(OUTPREFIX, SCAFFOLD, ".tsv"))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # START MESSAGE
 message(">>> PicMin analysis started at: ", Sys.time())
@@ -84,7 +137,7 @@ pvals[, window_id := x$window_id]
 # 4) Build p-value matrix for PicMin
 # ------------------------------------------
 # Convert p-values to a matrix with windows as rows and lineages as columns,
-# ensuring row names match PicMin’s required locus ide
+# ensuring row names match PicMinâ€™s required locus ide
 # ==========================================
 pmat <- as.matrix(pvals[, ..pop_cols])
 rownames(pmat) <- pvals$window_id
