@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --time=48:00:00
 #SBATCH -A lp_svbelleghem
-#SBATCH --array=1 	#10 scaffolds
+#SBATCH --array=1-10 	#10 scaffolds
 
 # ========================================================================================
 # PicMin SLURM Array
@@ -51,12 +51,16 @@ OUT_DIR="/lustre1/scratch/363/vsc36396/picmin/output"
 
 # 5. Input file
 INFILE="${IN_DIR}/PicMin_input_meanLR_10kb_windows_woContam.txt"
-OUTPREFIX="pops_all_"
+OUTPREFIX="pops_all_theta2"
 
 # 6. Parameters
+# Suggested defaults (6 pops): WINDOW=10000, NUMREPS=100000, NSIMS=40000, THETA=0.5
+# For npops~20, you MAY? need much larger NUMREPS and NSIMS	-> not for my dataset
+# For npops~20, you MAY? need higher theta 			-> not for my dataset
 WINDOW=10000
-NUMREPS=100000
+NUMREPS=10000
 NSIMS=40000
+THETA=2
 
 # ---- Run the R script ----
 
@@ -70,4 +74,5 @@ Rscript run_08_picmin_onescaf.R \
     "$OUTPREFIX" \
     "$WINDOW" \
     "$NUMREPS" \
-    "$NSIMS"
+    "$NSIMS" \
+    "$THETA"
