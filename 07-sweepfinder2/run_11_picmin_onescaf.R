@@ -7,64 +7,43 @@
 # This script is designed to be run from a SLURM array job. All required input parameters are supplied by the SLURM
 # submission script using command-line arguments. Nothing is hard-coded inside this R script.
 #
-# The script expects EXACTLY 10 arguments in the following order (matching the SLURM script):
+# The script expects EXACTLY 11 arguments in the following order (matching the SLURM script):
 #
 #   args[1] = SCAFFOLD
-#       Name of the genomic scaffold to process. The SLURM
-#       array determines which scaffold is passed.
-#
+#       Name of the genomic scaffold to process. The SLURMarray determines which scaffold is passed.
 #   args[2] = pop_cols
-#       Comma-separated list of population column names
-#       present in the input file (no spaces). This vector
-#       is split in R and defines the population-specific
-#       p-values used by PicMin.
-#
+#       Comma-separated list of population column names present in the input file (no spaces). This vector
+#       is split in R and defines the population-specific p-values used by PicMin.
 #   args[3] = missing_levels
-#       Comma-separated integers specifying how many
-#       populations must be present (non-missing) for each
-#       PicMin run. For each n in this list, a separate
-#       null model is generated and applied.
-#
+#       Comma-separated integers specifying how many populations must be present (non-missing) for each
+#       PicMin run. For each n in this list, a separate null model is generated and applied.
 #   args[4] = IN_DIR
 #       Directory where the input file is located.
-#
 #   args[5] = OUT_DIR
-#       Directory where output files will be written.
-#       Created automatically if not present.
-#
+#       Directory where output files will be written. Created automatically if not present.
 #   args[6] = infile
-#       Full path to the PicMin input file containing all
-#       scaffolds. The script subsets it based on SCAFFOLD.
-#
+#       Full path to the PicMin input file containing all scaffolds. The script subsets it based on SCAFFOLD.
 #   args[7] = OUTPREFIX
-#       Prefix used when constructing the output filename.
-#       The final output file will be:
+#       Prefix used when constructing the output filename. The final output file will be:
 #            <OUT_DIR>/<OUTPREFIX><SCAFFOLD>.tsv
-#
 #   args[8] = WIN_SIZE
-#       Window size used by the input dataset (e.g. 10000).
-#       This does not change PicMin internals but is kept
+#       Window size used by the input dataset (e.g. 10000). This does not change PicMin internals but is kept
 #       for clarity and future flexibility.
-#
 #   args[9] = numReps
-#       Number of replicates used by PicMin for estimating
-#       the p-value for each window. Higher = more accurate.
-#
+#       Number of replicates used by PicMin for estimating the p-value for each window. Higher = more accurate.
 #  args[10] = nsims
-#       Number of null simulations used to generate order-
-#       statistic correlation matrices. Larger values improve
+#       Number of null simulations used to generate order-statistic correlation matrices. Larger values improve
 #       stability but increase memory usage.
+#  args[11] = theta
+#	Value of theta in the creation of the nullempirical values and the correlation matrix. Higher ? means 
+#	lineages behave more similarly and produce larger null minima. More lineages require higher theta.
 #
 # ----------------------------------------------------------
 # GENERAL NOTES:
-# - All argument parsing is strict; the script halts if the
-#   expected number of parameters is not supplied.
-# - The script constructs its output filename internally
-#   using OUTPREFIX and SCAFFOLD.
-# - No assumptions are made about job arrays; they are
-#   handled entirely by the SLURM script.
-# - Null correlation matrices are generated per missing-
-#   level category, ensuring correct PicMin inference.
+# - All argument parsing is strict; the script halts if the expected number of parameters is not supplied.
+# - The script constructs its output filename internally using OUTPREFIX and SCAFFOLD.
+# - No assumptions are made about job arrays; they are handled entirely by the SLURM script.
+# - Null correlation matrices are generated per missing-level category, ensuring correct PicMin inference.
 # ==========================================================
 
 rm(list = ls())
@@ -88,8 +67,8 @@ setwd("/lustre1/scratch/363/vsc36396/picmin")
 # ==========================================
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) < 10) {
-    stop("Not enough arguments supplied. Expected 10 arguments: SCAFFOLD, POPS, MISS, IN_DIR, OUT_DIR, INFILE, OUTPREFIX, WINDOW, NUMREPS, NSIMS")
+if (length(args) < 11) {
+    stop("Not enough arguments supplied. Expected 11 arguments: SCAFFOLD, POPS, MISS, IN_DIR, OUT_DIR, INFILE, OUTPREFIX, WINDOW, NUMREPS, NSIMS, THETA")
 }
 
 SCAFFOLD       <- args[1]
@@ -102,6 +81,7 @@ OUTPREFIX      <- args[7]
 WIN_SIZE       <- as.integer(args[8])
 numReps        <- as.integer(args[9])
 nsims          <- as.integer(args[10])
+theta          <- as.integer(args[11])
 
 outfile <- file.path(OUT_DIR, paste0(OUTPREFIX, SCAFFOLD, ".tsv"))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -157,7 +137,7 @@ for (n in missing_levels) {
   message("=== Running PicMin for n = ", n, " populations present ===")
   
   # Null correlation of ordered p-values
-  null_raw     <- t(replicate(nsims, PicMin:::GenerateNullData(1.0, n, 0.5, 3, 10000)))
+  null_raw     <- t(replicate(nsims, PicMin:::GenerateNullData(1.0, n, theta, 3, 10000)))
   null_ordered <- t(apply(null_raw, 1, PicMin:::orderStatsPValues))
   null_cor     <- cor(null_ordered)
   
