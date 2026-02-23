@@ -1,15 +1,25 @@
-Perfmorming scans of selection sweep signatures along the genome for different populations using the tool SweepFinder2 (SF2), and visualisation.
+Perfmorming scans of selection sweep signatures along the genome for different populations using the tool SweepFinder2 (SF2), and comparing them statistically with PicMin.
 
 **Run SF2**:
-1. run_07_subsetVCF_batch1234.sh
-2. run_07_filter_parseVCF_sweepfinder_poparray.sh
-3. run_07_sweepfinder_input_poparray.sh
-4. run_07_sweepfinder2_chromarray_A1.sh [...]
+1. subsetVCF_batch1234.sh
+2. filter_parseVCF_sweepfinder_poparray.sh
+3. sf2_input_poparray.sh
+4. globalsfs_poparray.sh
+5. sf2_pol_chromarray_A1.sh [runs for one population at a time, faster]
+6. sf2_pol_poparray.sh [runs for many populations at a time, slower]
 
-**Visualisation**:
-1. run_07_sf2_plot_A1.R [...]
-2. run_07_sf2_plot_combined_allp_alls.R
+**Visualisation SF2**:
+1. manhplot_methodcomparison.R [...]
+2. manhplot_A1_allscaf.R
+3. manhplot_allp_alls.R
 
+**Run PicMin**:
+1. picmin_prep.R
+2. picmin_onescaf.R
+3. picmin_chromarray.sh [runs picmin_onescaf.R for all chromosomes]
 
+**Visualisation PicMin**:
+1. picmin_plot_allscafs.R
 
-_Note: you should probably replace the hard-coded variables with soft-coded ones..._
+**Combine plots**:
+1. combine_pngplots.R
