@@ -10,7 +10,7 @@
 #SBATCH --array=1-10 	#10 scaffolds
 
 # -------------------------------------------------------------------------------
-#  Running pixy for pi, theta w, and Tajima’s D for each population and
+#  Running pixy for pi, theta w, and Tajimaâ€™s D for each population and
 #  dxy, FST for each populaion pair.
 #  Sources:
 #	https://pixy.readthedocs.io/en/latest/index.html
