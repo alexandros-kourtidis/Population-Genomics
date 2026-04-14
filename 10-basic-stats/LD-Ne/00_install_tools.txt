@@ -1,0 +1,21 @@
+# --------------------
+#  currentNe2
+# --------------------
+
+cd /vsc-hard-mounts/leuven-data/363/vsc36396/programs/currentNe2
+
+module load GCC
+module load OpenMPI
+
+g++ --version	# check
+
+### install/compile currentNe2 ###
+
+git clone https://github.com/esrud/currentNe2.git
+cd currentNe2
+make
+
+##############################---PROGRAM PATH---#########################################
+   /vsc-hard-mounts/leuven-data/363/vsc36396/programs/currentNe2/currentNe2/currentne2  
+#########################################################################################
+
