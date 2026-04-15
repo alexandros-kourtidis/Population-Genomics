@@ -65,5 +65,27 @@ bcftools view --threads 15 \
 
 bcftools index -t --threads 15 "$FILT_VCF"
 
+# -------------------------------------------------------------------------------
+# 2) Counts in the filtered file:
+#	- samples
+#	- variants
+#	- (non-missing) genotypes
+# -------------------------------------------------------------------------------
+
+echo "writting counts summary..."
+
+nsamples=$(bcftools query -l "$FILT_VCF" | wc -l)
+nvariants=$(bcftools index -n "$FILT_VCF")
+ngenotypes=$(bcftools query -f '[%GT\t]\n' "$FILT_VCF" \
+  | grep -o -E '[0-9]\|[0-9]|[0-9]/[0-9]' \
+  | wc -l)
+
+cat <<EOF > "$OUT"
+VCF file:        $FILT_VCF
+Samples:         $nsamples
+Variants:        $nvariants
+Non-missing GTs: $ngenotypes
+EOF
+
 echo "Filtering completed."
 
