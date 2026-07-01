@@ -10,7 +10,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --output=logs/04_run_treemix_%A_m%a.log
 #SBATCH -A lp_svbelleghem
-#SBATCH --array=0    # amount of migration edges m
+#SBATCH --array=11-14    # amount of migration edges m
 
 set -euo pipefail
 
@@ -32,7 +32,7 @@ INPUT="$INDIR/treemix.frq.gz"
 RUNDIR="$OUTDIR/treemix_runs"
 
 ROOT_POP="CN_W1"
-REPLICATES=1
+REPLICATES=5
 TREEMIX_K=20
 GLOBAL_REARR=true
 
@@ -50,7 +50,7 @@ SEED_BASE=42
 
 for rep in $(seq 1 "$REPLICATES"); do
     seed=$((SEED_BASE + m * 1000 + rep))
-    outpfx="$RUNDIR/m${m}/rep${rep}/treemix.m${m}.rep${rep}"
+    outpfx="$RUNDIR/m${m}/treemix.m${m}.rep${rep}"
     mkdir -p "$(dirname "$outpfx")"
 
     cmd=(
