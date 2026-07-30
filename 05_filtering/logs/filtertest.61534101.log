@@ -1,0 +1,19 @@
+SLURM_JOB_ID: 61534101
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: filter_test
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: m33c30n3
+SLURM_JOB_CPUS_PER_NODE: 8
+Date: Thu Jul 23 18:14:13 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+filtering for VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss.vcf.gz ...
+indexing the filtered vcf...
+creating stats txt file for VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss.vcf.gz...
+filtering for VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF_noMitoMiss.vcf.gz ...
+indexing the filtered vcf...
+creating stats txt file for VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF_noMitoMiss.vcf.gz...
+done

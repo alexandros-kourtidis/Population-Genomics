@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 61534287
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: filter_invs
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: q28c22n2
+SLURM_JOB_CPUS_PER_NODE: 8
+Date: Thu Jul 23 18:22:28 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+filtering for VCFs/batch1234_merged1_10.inv.DPMQ_DP_MISS_noMitoMiss.vcf.gz ...
+indexing the filtered vcf...
+creating stats txt file for VCFs/batch1234_merged1_10.inv.DPMQ_DP_MISS_noMitoMiss.vcf.gz...
+done

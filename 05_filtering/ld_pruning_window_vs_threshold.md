@@ -1,0 +1,10 @@
+Being strict: the decay distance and the r² threshold answer two different questions.
+
+- **Window size** (`--indep-pairwise <window> <step> <r2>`) should be set so that the window is *at least* as large as the distance over which meaningful LD exists in your data. If your decay curve shows r² drops to background by ~50kb, then a 50–100kb window (or the SNP-count equivalent at your marker density) is justified — smaller windows would fail to capture real LD, larger ones just waste compute without added SNP removal.
+- **r² threshold** (0.2, 0.1, 0.5, etc.) is not something the decay curve determines. It's a **downstream-analysis-driven stringency choice** — e.g., PCA/admixture often use 0.1–0.2 to remove nearly all linkage signal, while GWAS/heritability analyses sometimes tolerate up to 0.5. The decay curve doesn't tell you which threshold is "correct" because that depends on how sensitive your downstream method is to residual LD, not on the LD pattern itself. Don't cite the decay curve as justification for the threshold value — only for the window.
+
+**3. Inspect the curve(s) and extract the decay distance**
+
+Look at where mean r² crosses your chosen definition (half-decay point, or plateau/background level — check the `.stat.gz` output, don't eyeball the plot alone). Because you have 20 populations, be strict about one more thing: **populations can have different effective population sizes and decay differently** (e.g., bottlenecked or inbred pops decay slower/retain LD longer). Use the **slowest-decaying population** (i.e., the largest decay distance) — or the pooled metapopulation curve if it decays even slower due to population structure — to set your window size. This ensures the window is large enough for every population in the dataset, not just the average case.
+
+This should replace the *window* paremeter in LD prunning
