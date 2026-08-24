@@ -8,6 +8,8 @@
 #SBATCH -A lp_svbelleghem
 #SBATCH --array=1-398  # Adjust this to match the number of samples (397 batch1234 + 1 CN_W1_1)
 
+# NOTE: might be required to subset
+
 # Load required modules
 module load SAMtools/1.16.1-GCC-11.3.0
 module load BCFtools/1.15.1-GCC-11.3.0

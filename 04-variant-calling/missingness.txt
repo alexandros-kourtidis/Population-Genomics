@@ -1,3 +1,0 @@
-# Count of missingness data per individual in a (gzipped) vcf file. The output is an out.miss file
-
-vcftools --gzvcf file.vcf.gz --missing-indv
