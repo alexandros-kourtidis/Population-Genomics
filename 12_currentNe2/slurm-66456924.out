@@ -1,0 +1,19 @@
+SLURM_JOB_ID: 66456924
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: currentNe2
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: n28c20n4
+SLURM_JOB_CPUS_PER_NODE: 16
+Date: Fri Apr 17 17:00:51 CEST 2026
+Walltime: 01-00:00:00
+========================================================================
+/var/spool/slurmd/job66456924/slurm_script: line 23: /lustre1/scratch/XXX/vscXXXXX/LD_Ne/currentNe2/vcfs: Is a directory
+Decompressing VCF file ...
+Running currentNe2 ...
+Missing data file name
+/var/spool/slurmd/job66456924/slurm_script: line 56: -t: command not found
+Deleting unzipped vcf file ...
+currentNe2 has run

@@ -1,0 +1,27 @@
+SLURM_JOB_ID: 61864010
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: pca
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: m33c25n4
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Tue Sep  1 14:43:48 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+Running the PCA in PLINK...
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to pruned_20kb0.1.log.
+Options in effect:
+  --allow-extra-chr
+  --allow-no-sex
+  --bfile /lustre1/scratch/XXX/vscXXXXX/ld_pruning/plink_out/data
+  --out pruned_20kb0.1
+  --pca 50
+
+257534 MB RAM detected; reserving 128767 MB for main workspace.
+Error: Failed to open
+/lustre1/scratch/XXX/vscXXXXX/ld_pruning/plink_out/data.bed.
+plink pca is done

@@ -1,0 +1,22 @@
+SLURM_JOB_ID: 66457434
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: currentNe2
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: m28c20n3
+SLURM_JOB_CPUS_PER_NODE: 16
+Date: Fri Apr 17 19:08:06 CEST 2026
+Walltime: 01-00:00:00
+========================================================================
+Decompressing VCF file ...
+Unzipping vcfs/batch1234.filtered.vcf.gz ...
+Running currentNe2 ...
+ A progress report is stored at vcfs/batch1234.filtered.vcf_currentNe2_progress.tmp
+ Check it using 'cat vcfs/batch1234.filtered.vcf_currentNe2_progress.tmp'
+ Reading file vcfs/batch1234.filtered.vcf
+ Reading vcfs/batch1234.filtered.vcf took 40.23 sec
+ Processing file
+ End of process. Output file currentNe2_out/batch1234 generated
+currentNe2 has run

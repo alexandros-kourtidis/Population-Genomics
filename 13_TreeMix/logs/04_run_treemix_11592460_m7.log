@@ -1,0 +1,29 @@
+SLURM_JOB_ID: 11592468
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_run
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_ARRAY_JOB_ID: 11592460
+SLURM_ARRAY_TASK_ID: 7
+SLURM_NNODES: 1
+SLURM_NODELIST: p11c05n2
+SLURM_JOB_CPUS_PER_NODE: 2
+Date: Mon Sep 21 17:47:39 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+m: 7
+Input frequencies: treemix_input/treemix.frq.gz
+Output dir: treemix_results/treemix_runs/m7
+Replicates: 10
+Running m=7 rep=1 seed=7043
+Running m=7 rep=2 seed=7044
+Running m=7 rep=3 seed=7045
+Running m=7 rep=4 seed=7046
+Running m=7 rep=5 seed=7047
+Running m=7 rep=6 seed=7048
+Running m=7 rep=7 seed=7049
+Running m=7 rep=8 seed=7050
+Running m=7 rep=9 seed=7051
+Running m=7 rep=10 seed=7052
+m=7 complete (all 10 replicates)

@@ -12,7 +12,7 @@ module load cluster/wice/batch_sapphirerapids
 module load FastQC
  
 # Directory containing the directories to rename
-cd /lustre1/scratch/363/vsc36396/daphnia_reseq/chaturvedi
+cd /lustre1/scratch/XXX/vscXXXXX/daphnia_reseq/chaturvedi
  
 #This variable will store the job array number minus 1, so we can use it to get a sample from the samples list (index starts at 0)
 ID=$((SLURM_ARRAY_TASK_ID -1))

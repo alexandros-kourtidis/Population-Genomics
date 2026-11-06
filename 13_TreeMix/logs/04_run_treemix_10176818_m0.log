@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 10176818
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_run
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_ARRAY_JOB_ID: 10176818
+SLURM_ARRAY_TASK_ID: 0
+SLURM_NNODES: 1
+SLURM_NODELIST: p11c17n3
+SLURM_JOB_CPUS_PER_NODE: 2
+Date: Tue Jun 30 16:59:39 CEST 2026
+Walltime: 00-04:00:00
+========================================================================
+Loading cluster modules...
+/var/spool/slurmd/job10176818/slurm_script: line 20: conda: command not found

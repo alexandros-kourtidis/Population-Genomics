@@ -1,0 +1,1 @@
+CN_alignments/CN_W1_1_aligned.sorted.nd.bam CN_W1_1

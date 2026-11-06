@@ -1,0 +1,39 @@
+SLURM_JOB_ID: 62008799
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: pixy
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_ARRAY_JOB_ID: 62008799
+SLURM_ARRAY_TASK_ID: 1
+SLURM_NNODES: 1
+SLURM_NODELIST: l33c25n3
+SLURM_JOB_CPUS_PER_NODE: 5
+Date: Mon Sep 14 16:16:30 CEST 2026
+Walltime: 01-00:00:00
+========================================================================
+Running pixy for pi watterson_theta tajima_d on Mt every 15000bp ...
+2026-09-14 16:16:46 [pixy] pixy 2.2.3
+2026-09-14 16:16:46 [pixy] See documentation at https://pixy.readthedocs.io/en/latest/
+2026-09-14 16:16:46 [pixy] Validating VCF and input parameters...
+2026-09-14 16:16:46 [pixy] Checking write access...
+2026-09-14 16:16:46 [pixy] Checking CPU configuration...
+2026-09-14 16:16:46 [pixy] Checking for invariant sites...
+2026-09-14 16:16:46 [pixy] Checking chromosome data...
+2026-09-14 16:16:46 [pixy] Checking intervals/sites...
+2026-09-14 16:16:46 [pixy] OK
+2026-09-14 16:16:46 [pixy] Checking sample data...
+2026-09-14 16:16:48 [pixy] Inferred ploidy: 1 (uniform across contigs)
+2026-09-14 16:16:48 [pixy] All initial checks passed!
+2026-09-14 16:16:48 [pixy] Preparing for calculation of summary statistics: pi, watterson_theta, tajima_d
+2026-09-14 16:16:48 [pixy] Data set contains 1 populations, 1 chromosome(s), and 392 sample(s)
+2026-09-14 16:16:48 [pixy] Window size: 15000 bp
+2026-09-14 16:16:48 [pixy] Started calculations!
+2026-09-14 16:16:48 [pixy] Using 5 out of 72 available CPU cores
+2026-09-14 16:16:48 [pixy] Processing chromosome/contig Mt
+2026-09-14 16:16:48 [pixy] Calculating statistics for region Mt:1-14512
+2026-09-14 16:16:52 [pixy] All calculations complete!
+2026-09-14 16:16:52 [pixy] Time elapsed: 00:00:04
+2026-09-14 16:16:52 [pixy] Output files written to pixy_out_Mt_metapop
+2026-09-14 16:16:52 [pixy] If you use pixy in your research, please cite the following paper: Korunes, KL and K Samuk. pixy: Unbiased estimation of nucleotide diversity and divergence in the presence of missing data. Mol Ecol Resour. 2021 Jan 16. doi: 10.1111/1755-0998.13326.
+pixy has run

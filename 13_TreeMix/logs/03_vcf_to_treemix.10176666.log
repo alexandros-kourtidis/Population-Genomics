@@ -1,0 +1,23 @@
+SLURM_JOB_ID: 10176666
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_convert
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_NNODES: 1
+SLURM_NODELIST: m11c05n1
+SLURM_JOB_CPUS_PER_NODE: 3
+Date: Tue Jun 30 14:53:38 CEST 2026
+Walltime: 00-04:00:00
+========================================================================
+Loading cluster modules...
+=================
+Input VCF: PLINK/batch1234CN_ldpruned_clean.vcf.gz
+Population map: population_map.txt
+TreeMix output: treemix_input/treemix.frq.gz
+Creating output directories...
+Converting LD-pruned VCF to TreeMix format...
+[INFO] Populations found: A1_AnOudin, A2_BuSN, A3_Mech, A4_Pl15YEL, A5_GenM, B1_BKN1, B2_OM2, B3_ZW, B4_OHZ, B5_DA2, C1_BlfN, C2_MO, C3_Ter1, C4_BW48630, C5_BW36962, CN_W1, D1_CBOO6, D2_LRV, D3_BKLE5, D4_BW62256, D5_BW22050
+[INFO] SNPs written : 21787
+[INFO] SNPs skipped : 337
+TreeMix input written to treemix_input/treemix.frq.gz

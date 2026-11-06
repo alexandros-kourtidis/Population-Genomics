@@ -9,13 +9,13 @@
  
  
 # Directory containing the directories to rename
-cd /lustre1/scratch/363/vsc36396/daphnia_reseq/batch4
+cd /lustre1/scratch/XXX/vscXXXXX/daphnia_reseq/batch4
  
 #For making sure that the txt file created on Windows is used in a Unix-like environment:
-#dos2unix /vsc-hard-mounts/leuven-data/363/vsc36396/scripts/batch4_list.txt
+#dos2unix /vsc-hard-mounts/leuven-data/XXX/vscXXXXX/scripts/batch4_list.txt
  
 #Path to the renaming file
-RENAME_FILE=/vsc-hard-mounts/leuven-data/363/vsc36396/scripts/batch4_list.txt
+RENAME_FILE=/vsc-hard-mounts/leuven-data/XXX/vscXXXXX/scripts/batch4_list.txt
  
  
 # Rename directories based on the text file Rename directories based on the text file

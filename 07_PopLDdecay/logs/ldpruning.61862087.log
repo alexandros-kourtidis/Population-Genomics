@@ -1,0 +1,43 @@
+SLURM_JOB_ID: 61862087
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: ldpruning
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n2
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Tue Sep  1 11:57:52 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+Running PLINK...
+Calculating the correlation values...
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to plink_out/batch1234_plink.log.
+Options in effect:
+  --bfile data
+  --indep-pairwise 100 kb 5 0.1
+  --out plink_out/batch1234_plink
+
+Warning: --indep-pairwise step size should be 1 when window size is in kb
+units.
+257534 MB RAM detected; reserving 128767 MB for main workspace.
+
+Error: Invalid chromosome code 'scaffold_1' on line 1 of .bim file.
+(Use --allow-extra-chr to force it to be accepted.)
+Creating the bed files...
+PLINK v1.90b6.9 64-bit (4 Mar 2019)            www.cog-genomics.org/plink/1.9/
+(C) 2005-2019 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to plink_out/batch1234_plink_LDpruned.log.
+Options in effect:
+  --bfile data
+  --extract plink_out/batch1234_plink.prune.in
+  --make-bed
+  --out plink_out/batch1234_plink_LDpruned
+
+257534 MB RAM detected; reserving 128767 MB for main workspace.
+
+Error: Invalid chromosome code 'scaffold_1' on line 1 of .bim file.
+(Use --allow-extra-chr to force it to be accepted.)
+Plink has run

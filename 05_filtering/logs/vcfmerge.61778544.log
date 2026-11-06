@@ -1,0 +1,26 @@
+SLURM_JOB_ID: 61778544
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: vcf_rename
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: m28c32n1
+SLURM_JOB_CPUS_PER_NODE: 10
+Date: Mon Aug 24 18:37:36 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+Cleaning sample names: batch1234_merged1_10.inv.DPMQ_DP_MISS_noMitoMiss.vcf.gz
+Cleaning sample names: batch1234_merged1_10.inv.DPMQ_DP_MISS.vcf.gz
+Cleaning sample names: batch1234_merged1_10.inv.DPMQ_DP.vcf.gz
+Cleaning sample names: batch1234_merged1_10.inv.DPMQ.vcf.gz
+Cleaning sample names: batch1234_merged1_10.inv.QUALDPMQ_DPGQ_MISS.vcf.gz
+Cleaning sample names: batch1234_merged1_10.invsnp.filtered_sorted.vcf.gz
+Cleaning sample names: batch1234_merged1_10.raw.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF_noMitoMiss.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISS.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ_DPGQ.vcf.gz
+Cleaning sample names: batch1234_merged1_10.snp.QUALDPMQ.vcf.gz
+done

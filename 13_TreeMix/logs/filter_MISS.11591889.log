@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 11591889
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: filter_treemix
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_NNODES: 1
+SLURM_NODELIST: m11c05n2
+SLURM_JOB_CPUS_PER_NODE: 16
+Date: Mon Sep 21 13:36:39 CEST 2026
+Walltime: 00-02:00:00
+========================================================================
+filtering for missingness ...
+indexing the filtered vcf...
+creating stats txt file for /lustre1/scratch/XXX/vscXXXXX/treemix/VCFs/batch1234CN.snps.MISS.vcf.gz...
+filtering is done

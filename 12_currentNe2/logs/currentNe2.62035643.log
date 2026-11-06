@@ -1,0 +1,24 @@
+SLURM_JOB_ID: 62035643
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: currentNe2
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_ARRAY_JOB_ID: 62035625
+SLURM_ARRAY_TASK_ID: 19
+SLURM_NNODES: 1
+SLURM_NODELIST: l33c22n3
+SLURM_JOB_CPUS_PER_NODE: 5
+Date: Wed Sep 16 18:12:29 CEST 2026
+Walltime: 01-00:00:00
+========================================================================
+Decompressing VCF file ...
+Running currentNe2 for D4_BW62256...
+ A progress report is stored at VCFs/D4_BW62256.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss_popMISSMAF.vcf_currentNe2_progress.tmp
+ Check it using 'cat VCFs/D4_BW62256.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss_popMISSMAF.vcf_currentNe2_progress.tmp'
+ Reading file VCFs/D4_BW62256.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss_popMISSMAF.vcf
+ Reading VCFs/D4_BW62256.snp.QUALDPMQ_DPGQ_MISS_noMitoMiss_popMISSMAF.vcf took 3.15 sec
+ Processing file
+ End of process. Output file currentNe2_out/no_substructure/D4_BW62256 generated
+Deleting unzipped vcf file ...
+currentNe2 has run

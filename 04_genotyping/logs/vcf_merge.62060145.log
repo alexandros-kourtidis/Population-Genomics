@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 62060145
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: vcf_merge
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: n28c30n2
+SLURM_JOB_CPUS_PER_NODE: 16
+Date: Fri Sep 18 16:53:28 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+merging /lustre1/scratch/XXX/vscXXXXX/VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF_noMitoMiss.vcf.gz and /lustre1/scratch/XXX/vscXXXXX/CN_W1/CN_DmagnaLRV01_merged1_10.vcf.gz ...
+indexing the merged vcf...
+creating stats txt file for VCFs/batch1234CN_DmagnaLRV01_merged1_10.vcf.gz...
+merging is done

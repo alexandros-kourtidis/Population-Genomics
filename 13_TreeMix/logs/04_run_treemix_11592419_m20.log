@@ -1,0 +1,20 @@
+SLURM_JOB_ID: 11592419
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_run
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_ARRAY_JOB_ID: 11592419
+SLURM_ARRAY_TASK_ID: 20
+SLURM_NNODES: 1
+SLURM_NODELIST: p11c05n2
+SLURM_JOB_CPUS_PER_NODE: 2
+Date: Mon Sep 21 17:32:14 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+m: 20
+Input frequencies: treemix_input/treemix.frq.gz
+Output dir: treemix_results/treemix_runs/m20
+Replicates: 5
+Running m=20 rep=1 seed=20043
+[2026-09-21T17:37:03.504] error: *** JOB 11592419 ON p11c05n2 CANCELLED AT 2026-09-21T17:37:03 DUE to SIGNAL Terminated ***

@@ -1,0 +1,26 @@
+SLURM_JOB_ID: 61896886
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: pixy
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_ARRAY_JOB_ID: 61896878
+SLURM_ARRAY_TASK_ID: 8
+SLURM_NNODES: 1
+SLURM_NODELIST: r33c32n3
+SLURM_JOB_CPUS_PER_NODE: 5
+Date: Thu Sep  3 16:57:09 CEST 2026
+Walltime: 01-00:00:00
+========================================================================
+Running pixy for pi fst dxy watterson_theta tajima_d on  every 15000bp ...
+2026-09-03 16:57:16,523 pixy.__main__:main:273 [INFO]: [pixy] pixy 2.0.0.beta14
+2026-09-03 16:57:16,523 pixy.__main__:main:274 [INFO]: [pixy] See documentation at https://pixy.readthedocs.io/en/latest/
+/data/leuven/XXX/vscXXXXX/miniconda3/envs/pixy/lib/python3.11/site-packages/allel/io/vcf_read.py:1732: UserWarning: invalid INFO header: '##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">\n'
+  warnings.warn('invalid INFO header: %r' % header)
+2026-09-03 16:57:16,533 pixy.args_validation:check_and_validate_args:531 [INFO]: Validating VCF and input parameters...
+2026-09-03 16:57:16,533 pixy.args_validation:check_and_validate_args:534 [INFO]: Checking write access...
+2026-09-03 16:57:16,533 pixy.args_validation:check_and_validate_args:541 [INFO]: Checking CPU configuration...
+2026-09-03 16:57:16,533 pixy.args_validation:check_and_validate_args:564 [INFO]: Checking for invariant sites...
+2026-09-03 16:57:16,865 pixy.args_validation:check_and_validate_args:601 [INFO]: Checking chromosome data...
+ValueError: The following chromosomes were specified but do not occur in the VCF: ['None']
+pixy has run

@@ -1,0 +1,21 @@
+SLURM_JOB_ID: 62088379
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_convert
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n2
+SLURM_JOB_CPUS_PER_NODE: 3
+Date: Mon Sep 21 15:48:46 CEST 2026
+Walltime: 00-04:00:00
+========================================================================
+Input VCF: plink_out/batch1234CN.snps.MISS_plink10kb.vcf.gz
+Population map: /user/leuven/XXX/vscXXXXX/DATA/scripts/13_TreeMix/population_map.txt
+TreeMix output: treemix_input/treemix.frq.gz
+Creating output directories...
+Converting LD-pruned VCF to TreeMix format...
+[INFO] Populations found: A1_AnOudin, A2_BuSN, A3_Mech, A4_PL15YEL, A5_GenM, B1_BKN1, B2_OM2, B3_ZW, B4_OHZ, B5_DA2, C1_BlfN, C2_MO, C3_Ter1, C4_BW48630, C5_BW36962, CN_W1, D1_CBOO6, D2_LRV, D3_BKLE5, D4_BW62256, D5_BW22050
+[INFO] SNPs written : 58030
+[INFO] SNPs skipped : 2533
+TreeMix input written to treemix_input/treemix.frq.gz

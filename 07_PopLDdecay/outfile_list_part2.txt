@@ -1,0 +1,11 @@
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/C1_BlfN.LDdecay.stat.gz	C1_BlfN
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/C2_MO.LDdecay.stat.gz	C2_MO
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/C3_Ter1.LDdecay.stat.gz	C3_Ter1
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/C4_BW48630.LDdecay.stat.gz	C4_BW48630
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/C5_BW36962.LDdecay.stat.gz	C5_BW36962
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/D1_CBOO6.LDdecay.stat.gz	D1_CBOO6
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/D2_LRV.LDdecay.stat.gz	D2_LRV
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/D3_BKLE5.LDdecay.stat.gz	D3_BKLE5
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/D4_BW62256.LDdecay.stat.gz	D4_BW62256
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/D5_BW22050.LDdecay.stat.gz	D5_BW22050
+/lustre1/scratch/XXX/vscXXXXX/poplddecay/ld_decay_out/allpops.LDdecay.stat.gz	allpops

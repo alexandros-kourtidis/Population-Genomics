@@ -1,0 +1,26 @@
+SLURM_JOB_ID: 11592307
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: treemix_run
+SLURM_CLUSTER_NAME: mindwell
+SLURM_JOB_PARTITION: batch_graniterapids
+SLURM_ARRAY_JOB_ID: 11592295
+SLURM_ARRAY_TASK_ID: 11
+SLURM_NNODES: 1
+SLURM_NODELIST: m11c05n3
+SLURM_JOB_CPUS_PER_NODE: 2
+Date: Mon Sep 21 16:09:23 CEST 2026
+Walltime: 00-04:00:00
+========================================================================
+Loading cluster modules...
+=================
+m: 11
+Input frequencies: treemix_input/treemix.frq.gz
+Output dir: treemix_results/treemix_runs/m11
+Replicates: 5
+Running m=11 rep=1 seed=11043
+Running m=11 rep=2 seed=11044
+Running m=11 rep=3 seed=11045
+Running m=11 rep=4 seed=11046
+Running m=11 rep=5 seed=11047
+m=11 complete (all 5 replicates)

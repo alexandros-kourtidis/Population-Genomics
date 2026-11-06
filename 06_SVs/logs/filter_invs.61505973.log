@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 61505973
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: 01s
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n4
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Mon Jul 20 16:27:48 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+mkdir: cannot create directory ‘’: No such file or directory
+extracting locations of invariant sites on scaffold_4 from vcfs/batch1234_merged1_10.inv.QUALDPMQ.vcf.gz ...
+/var/spool/slurmd/job61505973/slurm_script: line 51: 01presences/batch1234_merged1_10.inv.QUALDPMQ.scaffold_4.01.txt: No such file or directory
+done

@@ -1,0 +1,21 @@
+SLURM_JOB_ID: 62059934
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: vcf_merge
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: n28c30n2
+SLURM_JOB_CPUS_PER_NODE: 16
+Date: Fri Sep 18 16:42:27 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+merging /lustre1/scratch/XXX/vscXXXXX/filtering/VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF.vcf.gz and /lustre1/scratch/XXX/vscXXXXX/CN_W1/CN_DmagnaLRV01_merged1_10.vcf.gz ...
+[E::idx_find_and_load] Could not retrieve index file for '/lustre1/scratch/XXX/vscXXXXX/filtering/VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF.vcf.gz'
+Failed to open /lustre1/scratch/XXX/vscXXXXX/filtering/VCFs/batch1234_merged1_10.snp.QUALDPMQ_DPGQ_MISSMAF.vcf.gz: could not load index
+indexing the merged vcf...
+index: failed to open VCFs/batch1234CN_DmagnaLRV01_merged1_10.vcf.gz
+creating stats txt file for VCFs/batch1234CN_DmagnaLRV01_merged1_10.vcf.gz...
+[E::hts_open_format] Failed to open file "VCFs/batch1234CN_DmagnaLRV01_merged1_10.vcf.gz" : No such file or directory
+Failed to read from VCFs/batch1234CN_DmagnaLRV01_merged1_10.vcf.gz: No such file or directory
+merging is done

@@ -1,0 +1,28 @@
+SLURM_JOB_ID: 61431669
+SLURM_JOB_USER: vsc36396
+SLURM_JOB_ACCOUNT: lp_svbelleghem
+SLURM_JOB_NAME: vcf_merge
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: l33c22n2
+SLURM_JOB_CPUS_PER_NODE: 24
+Date: Mon Jul 13 11:10:35 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+merging the chromosome VCFs...
+Checking the headers and starting positions of 11 files
+Concatenating batch1234_scaffold_1.vcf.gz	213.273400 seconds
+Concatenating batch1234_scaffold_2.vcf.gz	232.179964 seconds
+Concatenating batch1234_scaffold_3.vcf.gz	180.376134 seconds
+Concatenating batch1234_scaffold_4.vcf.gz	184.502565 seconds
+Concatenating batch1234_scaffold_5.vcf.gz	160.254529 seconds
+Concatenating batch1234_scaffold_6.vcf.gz	155.568003 seconds
+Concatenating batch1234_scaffold_7.vcf.gz	130.167263 seconds
+Concatenating batch1234_scaffold_8.vcf.gz	129.736563 seconds
+Concatenating batch1234_scaffold_9.vcf.gz	140.543861 seconds
+Concatenating batch1234_scaffold_10.vcf.gz	111.212525 seconds
+Concatenating batch1234_Mt.vcf.gz	0.249159 seconds
+indexing the VCFs...
+cleaning sample names...
+done
